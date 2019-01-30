@@ -1,0 +1,25 @@
+<ion-grid class="select-slider-wrapper" nopadding>
+  <ion-row class="select-slider-dontmove">
+    <ion-col class="select-slider-dontmove">
+      <div (click)="scrollLeft()" tappable [ngClass]="['left-gradient', 'gradient-height-' + platformClass, leftArrow ? 'show-arrow' : 'hide-arrow']">
+        <ion-icon class="select-slider-arrow" float-left ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+      </div>
+      <div (click)="scrollRight()" tappable [ngClass]="['right-gradient', 'gradient-height-' + platformClass, rightArrow ? 'show-arrow' : 'hide-arrow']">
+        <ion-icon class="select-slider-arrow" float-right ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+      </div>
+      <ion-scroll #scrollElement [ngClass]="['select-slider', 'slider-height-' + platformClass]" scrollX="true">
+        <button *ngFor="let item of options; let i = index"
+                class="select-slider-button"
+                ion-button
+                [clear]="(i != idx && !(elements[i].caption | isEmptyCaption)) ? '' : null"
+                [outline]="(i != idx && (elements[i].caption | isEmptyCaption)) ? '' : null"
+                tappable (click)="select(i)">
+          {{ elements[i].caption }}
+          <span *ngIf="(elements[i].color)"
+                class="button-mark"
+                [style.border-top]="'14px solid ' + elements[i].color"></span>
+        </button>
+      </ion-scroll>
+    </ion-col>
+  </ion-row>
+</ion-grid>
